@@ -1,0 +1,478 @@
+# Mother’s Day Cinematic Website 💖
+
+Save this as `index.html` and open it in your browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mother's Day 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#070707;
+    overflow-x:hidden;
+    color:white;
+}
+
+/* Background Glow */
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left, rgba(255,182,193,0.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.08), transparent 25%);
+    z-index:-2;
+}
+
+/* Stars */
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:0.2;transform:scale(1);}
+    50%{opacity:1;transform:scale(1.8);}
+}
+
+/* Password Screen */
+#lockScreen{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:999;
+}
+
+.lockBox{
+    background:rgba(255,255,255,0.05);
+    padding:40px;
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 0 40px rgba(255,192,203,0.2);
+}
+
+.lockBox h1{
+    font-family:'Great Vibes',cursive;
+    font-size:3rem;
+    color:#ffd6e7;
+    margin-bottom:10px;
+}
+
+.lockBox p{
+    color:#ccc;
+    margin-bottom:20px;
+}
+
+input{
+    width:260px;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:#111;
+    color:white;
+    margin-bottom:15px;
+    font-size:1rem;
+}
+
+button{
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,#ff9bb3,#ffd1dc);
+    color:black;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+/* Main Content */
+.main{
+    display:none;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:5rem;
+    font-family:'Great Vibes',cursive;
+    color:#ffd1dc;
+    animation:float 3s ease-in-out infinite;
+}
+
+.hero p{
+    max-width:700px;
+    margin-top:20px;
+    line-height:1.8;
+    color:#ddd;
+    font-size:1.1rem;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-12px);}
+}
+
+.scrollText{
+    margin-top:40px;
+    color:#aaa;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(10px);}
+}
+
+.section{
+    padding:100px 10%;
+}
+
+.sectionTitle{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:60px;
+    color:#ffd1dc;
+    font-family:'Great Vibes',cursive;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:25px;
+    padding:30px;
+    backdrop-filter:blur(8px);
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 0 30px rgba(255,192,203,0.2);
+}
+
+.card h3{
+    color:#ffd6e7;
+    margin-bottom:15px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.gallery img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    border-radius:20px;
+    transition:0.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.03);
+}
+
+.letter{
+    max-width:850px;
+    margin:auto;
+    text-align:center;
+    background:rgba(255,255,255,0.05);
+    padding:50px;
+    border-radius:30px;
+    line-height:2;
+    font-size:1.1rem;
+    color:#eee;
+}
+
+.final{
+    min-height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+}
+
+.final h2{
+    font-family:'Great Vibes',cursive;
+    font-size:4rem;
+    color:#ffd6e7;
+    margin-bottom:20px;
+}
+
+.final p{
+    max-width:700px;
+    color:#ccc;
+    line-height:1.8;
+}
+
+.musicBtn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    font-size:1.4rem;
+    z-index:100;
+}
+
+@media(max-width:768px){
+    .hero h1{
+        font-size:3.5rem;
+    }
+
+    .sectionTitle{
+        font-size:2.5rem;
+    }
+
+    .final h2{
+        font-size:3rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Lock Screen -->
+<div id="lockScreen">
+    <div class="lockBox">
+        <h1>Happy Mother’s Day 💖</h1>
+        <p>Only the world’s best mom can enter ✨</p>
+
+        <input type="password" id="password" placeholder="Enter Password">
+        <br>
+        <button onclick="unlockSite()">Open Website</button>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main" id="mainContent">
+
+<section class="hero">
+    <h1>To The Most Beautiful Soul 💐</h1>
+
+    <p>
+        Mom, thank you for every sacrifice, every prayer, every hug,
+        every sleepless night, and every moment you stood beside me.
+        No words could ever truly describe how much I love and appreciate you.
+        You are my home, my comfort, and my greatest blessing. 💖
+    </p>
+
+    <div class="scrollText">Scroll Down ✨</div>
+</section>
+
+<section class="section">
+    <h2 class="sectionTitle">Why You’re Amazing 🌸</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>💖 Endless Love</h3>
+            <p>
+                Your love has always been the safest place in my life.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌷 Your Sacrifices</h3>
+            <p>
+                You gave up so much just to make me smile.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>✨ My Inspiration</h3>
+            <p>
+                Your strength motivates me every single day.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🏡 My Safe Place</h3>
+            <p>
+                No matter what happens, your hugs always feel like home.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="sectionTitle">Our Memories 📸</h2>
+
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop" alt="memory">
+
+        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&auto=format&fit=crop" alt="memory">
+
+        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop" alt="memory">
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="sectionTitle">A Letter For You 💌</h2>
+
+    <div class="letter">
+        Dear Mom,<br><br>
+
+        I know I don’t always say it enough, but thank you for everything.
+        Thank you for believing in me when I doubted myself.
+        Thank you for standing beside me through every high and low.
+        Thank you for loving me unconditionally.
+
+        You are the strongest person I know.
+        Your kindness, warmth, and love make this world brighter.
+
+        I hope one day I can make you as proud and happy
+        as you’ve made me my entire life.
+
+        I love you forever and always. 💖
+    </div>
+</section>
+
+<section class="final">
+    <h2>Happy Mother’s Day 🌹</h2>
+
+    <p>
+        No matter how old I grow,
+        I will always need your love,
+        your smile,
+        and your presence in my life.
+        Thank you for being my everything. ✨
+    </p>
+</section>
+
+<button class="musicBtn" onclick="toggleMusic()">🎵</button>
+
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+</div>
+
+<script>
+/* Generate Stars */
+const starsContainer = document.getElementById('stars');
+
+for(let i=0;i<180;i++){
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    star.style.top = Math.random()*100 + '%';
+    star.style.left = Math.random()*100 + '%';
+    star.style.animationDelay = Math.random()*3 + 's';
+
+    starsContainer.appendChild(star);
+}
+
+/* Password Unlock */
+function unlockSite(){
+    const pass = document.getElementById('password').value;
+
+    if(pass === 'maa'){
+        document.getElementById('lockScreen').style.display='none';
+        document.getElementById('mainContent').style.display='block';
+
+        document.getElementById('bgMusic').play();
+    }
+    else{
+        alert('Wrong password 💔');
+    }
+}
+
+/* Music Toggle */
+const music = document.getElementById('bgMusic');
+let playing = true;
+
+function toggleMusic(){
+    if(playing){
+        music.pause();
+        playing=false;
+    }
+    else{
+        music.play();
+        playing=true;
+    }
+}
+</script>
+
+</body>
+</html>
+```
+
+## How To Use 🎀
+
+1. Create a folder.
+2. Save the code above as `index.html`
+3. Add your favorite song in the same folder and rename it:
+
+```text
+music.mp3
+```
+
+4. Replace the gallery images with your own photos.
+5. Open `index.html` in your browser.
+
+## Password 🔐
+
+Current password:
+
+```text
+maa
+```
+
+You can change it inside the JavaScript section.
