@@ -555,8 +555,8 @@ button:hover{
 
     <!-- Music -->
     <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mp3">
-    </audio>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
 
 </div>
 
@@ -605,7 +605,7 @@ function unlockSite(){
     const pass =
     document.getElementById('password').value;
 
-    if(pass === 'maa'){
+    if(pass === 'bestmom'){
 
         document.getElementById('lockScreen')
         .style.display='none';
@@ -616,8 +616,14 @@ function unlockSite(){
         const music =
         document.getElementById('bgMusic');
 
-        music.play().catch(()=>{
-            console.log('Autoplay blocked');
+        music.volume = 0.6;
+
+        music.play()
+        .then(()=>{
+            console.log("Music started");
+        })
+        .catch((err)=>{
+            console.log("Autoplay blocked:", err);
         });
 
     }
